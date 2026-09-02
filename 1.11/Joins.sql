@@ -132,3 +132,39 @@ INNER JOIN
     skills_dim AS sd
     ON sjd.skill_id = sd.skill_id --; to see all values--
 LIMIT 10;
+
+
+--Find the top 10 companies for posting jobs--
+--Thye must have >3000 postings--
+-- Limit this to US jobs only--
+--EXPLAN is more accurate to use-- 
+-- EXPLAIN ANALYZE --
+EXPLAIN ANALYZE
+SELECT
+    cd.name AS company_name,
+    COUNT(jpf.job_id) AS postings_count
+FROM
+    job_postings_fact AS jpf
+LEFT JOIN
+    company_dim AS cd
+    ON jpf.company_id = cd.company_iD
+WHERE
+    jpf.job_country = 'United States'
+GROUP BY
+    cd.name
+HAVING
+    COUNT(jpf.job_id) > 3000
+ORDER BY
+    postings_count DESC
+LIMIT 10;
+
+--Inspection--
+SELECT 
+job_id, 
+job_title_short, 
+salary_year_avg
+FROM
+    job_postings_fact
+where job_country = 'Nigeria'
+AND job_title_short = 'Data Engineer'
+LIMIT 10;
