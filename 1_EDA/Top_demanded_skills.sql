@@ -70,3 +70,29 @@ LIMIT 10;
 │ gcp        │         6446 │
 └────────────┴──────────────┘
 */
+
+/*
+Key Observations
+
+1. SQL is the most in-demand skill
+   - SQL leads with 29,221 demand counts.
+   - Python follows closely with 28,776.
+   - The gap is only 445, showing that both are highly important.
+
+2. Cloud skills are strongly represented
+   - AWS: 17,823
+   - Azure: 14,143
+   - GCP: 6,446
+   - AWS has the highest demand among the three major cloud platforms.
+
+3. Big data and data engineering tools are also in demand
+   - Spark: 12,799
+   - Airflow: 9,996
+   - Snowflake: 8,639
+   - Databricks: 8,183
+   
+   This suggests that employers are looking beyond basic SQL/Python toward tools used for data pipelines, distributed processing, and cloud data platforms.
+
+4. Java remains relevant
+   - Java appears with 7,267 demand counts, placing it above GCP but below the major data-engineering tools.
+*/
