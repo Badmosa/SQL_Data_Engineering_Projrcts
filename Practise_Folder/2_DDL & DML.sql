@@ -1,5 +1,11 @@
--- SQLBook: Code
-DESCRIBE
+--SELECT current_database();
+
+--switching database;
+--USE jobs_mart;
+--SHOW DATABASES;
+
+
+CREATE TABLE jobs_mart.staging.job_postings_flat AS
 SELECT
     jpf.job_id,
     jpf.job_title_short,
@@ -16,12 +22,22 @@ SELECT
     jpf.salary_rate,
     jpf.salary_year_avg,
     jpf.salary_hour_avg,
-    cd.company_id,
-    cd.name,
-    jpf.link,
-    jpf.link_google,
-    jpf.thumbnail
+    cd.name AS company_name
 FROM data_jobs.main.job_postings_fact AS jpf
 LEFT JOIN data_jobs.main.company_dim AS cd
-    ON jpf.company_id = cd.company_id
+    ON jpf.company_id = cd.company_id;
+
+
+SELECT *
+FROM staging.job_postings_flat
+LIMIT 10;
+
+
+
+
+
+SELECT *
+FROM staging.job_postings_flat AS jpf
+JOIN staging.priority_role AS r 
+    ON job_title_short = r.role_name
 LIMIT 10;
