@@ -1,3 +1,4 @@
+-- SQLBook: Code
 --SELECT current_database();
 
 --switching database;
@@ -5,7 +6,7 @@
 --SHOW DATABASES;
 
 
-CREATE TABLE jobs_mart.staging.job_postings_flat AS
+CREATE OR REPLACE TABLE jobs_mart.staging.job_postings_flat AS
 SELECT
     jpf.job_id,
     jpf.job_title_short,
@@ -35,9 +36,18 @@ LIMIT 10;
 
 
 
-
-SELECT *
+CREATE OR REPLACE VIEW staging.priority_jobs_flat_view AS
+SELECT
+    jpf.*
 FROM staging.job_postings_flat AS jpf
-JOIN staging.priority_role AS r 
-    ON job_title_short = r.role_name
-LIMIT 10;
+JOIN staging.priority_role AS r
+    ON jpf.job_title_short = r.role_name
+WHERE r.priority_lvl = 1;
+
+
+SELECT 
+    job_title_short,
+    COUNT(*) AS job_count
+FROM staging.priority_jobs_flat_view
+GROUP BY job_title_short
+ORDER BY job_count DESC;
