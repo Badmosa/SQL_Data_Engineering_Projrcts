@@ -70,10 +70,6 @@ RENAME COLUMN preferred_role TO priority_lvl;
 ALTER TABLE staging.priority_role
 ALTER COLUMN priority_lvl TYPE INTEGER;
 
---NOT RUNNED-- ABOVE RUNNED--
-ALTER TABLE staging.priority_role
-ALTER COLUMN priority_lvl TYPE BOOLEAN;
-
 
 UPDATE staging.priority_role
 SET priority_lvl = 3
@@ -85,3 +81,4 @@ FROM staging.priority_role;
 
 SELECT *
 FROM staging.priority_role;
+
