@@ -44,6 +44,18 @@ JOIN staging.priority_role AS r
     ON jpf.job_title_short = r.role_name
 WHERE r.priority_lvl = 1;
 
+-- Updating priority_lvl--
+UPDATE staging.priority_role
+SET priority_lvl = 1
+WHERE role_id = 1;
+
+UPDATE staging.priority_role
+SET priority_lvl = 2
+WHERE role_id = 2;
+
+UPDATE staging.priority_role
+SET priority_lvl = 3
+WHERE role_id = 3;
 
 SELECT 
     job_title_short,
@@ -51,3 +63,10 @@ SELECT
 FROM staging.priority_jobs_flat_view
 GROUP BY job_title_short
 ORDER BY job_count DESC;
+
+
+SELECT *
+FROM staging.priority_jobs_flat_view
+WHERE job_title_short = 'Senior Data Engineer';
+
+
