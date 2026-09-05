@@ -57,6 +57,11 @@ UPDATE staging.priority_role
 SET priority_lvl = 3
 WHERE role_id = 3;
 
+--Updating typo---
+UPDATE staging.priority_role
+SET role_name = 'Senior Data Engineer'
+WHERE role_id = 2;
+
 SELECT 
     job_title_short,
     COUNT(*) AS job_count
@@ -64,9 +69,15 @@ FROM staging.priority_jobs_flat_view
 GROUP BY job_title_short
 ORDER BY job_count DESC;
 
-
+CREATE TEMPORARY TABLE senior_jobs_flat_temp AS
 SELECT *
 FROM staging.priority_jobs_flat_view
 WHERE job_title_short = 'Senior Data Engineer';
 
 
+SELECT 
+    job_title_short,
+    COUNT(*) AS job_count
+FROM senior_jobs_flat_temp
+GROUP BY job_title_short
+ORDER BY job_count DESC;
